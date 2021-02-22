@@ -29,6 +29,14 @@ class MarsRoverTests: XCTestCase {
         XCTAssertEqual(sut.coordinate, expectedCoordinate)
     }
 
+    func test_moveForwardTwiceNorth_incrementsYCoordinateTwice() {
+        let expectedCoordinate = Coordinate(x: 0, y: 2)
+        let sut = makeSUT(coordinate: Coordinate(x: 0, y: 0), direction: "N")
+
+        sut.move(command: "FF")
+
+        XCTAssertEqual(sut.coordinate, expectedCoordinate)
+    }
 }
 
 private extension MarsRoverTests {
