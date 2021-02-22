@@ -17,6 +17,14 @@ public struct Coordinate: Equatable {
     }
 }
 
+public struct Grid {
+    let topRightCoordinate: Coordinate
+
+    public init(topRightCoordinate: Coordinate) {
+        self.topRightCoordinate = topRightCoordinate
+    }
+}
+
 public class Rover {
 
     public enum Direction: Int, CaseIterable {
@@ -44,10 +52,12 @@ public class Rover {
 
     private(set) public var coordinate: Coordinate
     private(set) public var direction: Direction
+    private let grid: Grid
 
-    public init(coordinate: Coordinate, direction: Direction) {
+    public init(coordinate: Coordinate, direction: Direction, grid: Grid) {
         self.coordinate = coordinate
         self.direction = direction
+        self.grid = grid
     }
 
     public func move(commands: String) {

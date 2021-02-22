@@ -198,20 +198,14 @@ class MarsRoverTests: XCTestCase {
 }
 
 private extension MarsRoverTests {
-    func makeSUT(coordinate: Coordinate = Coordinate(x: 0, y: 0), direction: Rover.Direction = .east) -> Rover {
-        return Rover(coordinate: coordinate, direction: direction)
+    func makeSUT(coordinate: Coordinate = Coordinate(x: 0, y: 0), direction: Rover.Direction = .east, grid: Grid = Grid(topRightCoordinate: Coordinate(x: 10, y: 10))) -> Rover {
+        return Rover(coordinate: coordinate, direction: direction, grid: grid)
     }
 
     func expect(sut: Rover, toMoveTo coordinate: Coordinate, withCommands commands: String, file: StaticString = #file, line: UInt = #line) {
         sut.move(commands: commands)
 
         XCTAssertEqual(sut.coordinate, coordinate, file: file, line: line)
-    }
-
-    func expect(sut: Rover, toTurnTo direction: Rover.Direction, withCommands commands: String, file: StaticString = #file, line: UInt = #line) {
-        sut.move(commands: commands)
-
-        XCTAssertEqual(sut.direction, direction, file: file, line: line)
     }
 
     func expectRover(withInitialDirection: Rover.Direction, toTurnTo expectedDirection: Rover.Direction, withCommands commands: String, file: StaticString = #file, line: UInt = #line) {
