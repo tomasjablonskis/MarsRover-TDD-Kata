@@ -7,16 +7,6 @@
 
 import Foundation
 
-public struct Coordinate: Equatable {
-    public var x: Int
-    public var y: Int
-
-    public init(x: Int, y: Int) {
-        self.x = x
-        self.y = y
-    }
-}
-
 public class Rover {
 
     public enum Direction: Int, CaseIterable {
