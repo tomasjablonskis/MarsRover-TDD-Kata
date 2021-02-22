@@ -26,4 +26,8 @@ public class Rover {
         self.coordinate = coordinate
         self.direction = direction
     }
+
+    public func move(command: String) {
+        coordinate.y += 1
+    }
 }

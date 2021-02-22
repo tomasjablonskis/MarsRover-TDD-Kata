@@ -20,4 +20,12 @@ class MarsRoverTests: XCTestCase {
         XCTAssertEqual(rover.direction, initialDirection)
     }
 
+    func test_moveForwardNorth_incrementsYCoordinate() {
+        let expectedCoordinate = Coordinate(x: 0, y: 1)
+        let rover = Rover(coordinate: Coordinate(x: 0, y: 0), direction: "N")
+
+        rover.move(command: "F")
+
+        XCTAssertEqual(rover.coordinate, expectedCoordinate)
+    }
 }
