@@ -180,49 +180,49 @@ class MarsRoverTests: XCTestCase {
         expectRover(withInitialDirection: .west, toTurnTo: .south, withCommands: "LLLLL")
     }
 
-    func test_moveForward_resetsYOnGridEdgeSurpassed() {
+    func test_moveForward_resetsCoordinateOnGridEdgeSurpassed() {
         let grid = Grid(topRightCoordinate: Coordinate(x: 10, y: 10))
-        let testCases: [(Coordinate, Rover.Direction, command: String)] = [
+        let testCases: [
+            (
+                initialCoordinate: Coordinate,
+                direction: Rover.Direction,
+                command: String
+            )
+        ] = [
             (Coordinate(x: 0, y: 10), .north, "F"),
             (Coordinate(x: 10, y: 0), .east, "F"),
             (Coordinate(x: 0, y: 10), .south, "B"),
             (Coordinate(x: 10, y: 0), .west, "B")
         ]
 
-        testCases.forEach { (coordinate, direction, command) in
-            expectRover(withInitialCoordinate: coordinate, andDirection: direction, onGrid: grid, toMoveTo: Coordinate(x: 0, y: 0), withCommands: command)
+        testCases.forEach { (initialCoordinate, direction, command) in
+            expectRover(withInitialCoordinate: initialCoordinate, andDirection: direction, onGrid: grid, toMoveTo: Coordinate(x: 0, y: 0), withCommands: command)
         }
     }
 
-    func test_moveForwardSouth_resetsYOnGridEdgeSurpassedToNegativeSide() {
+    func test_moveForward_resetsCoordinateOnGridEdgeSurpassedToNegativeSide() {
         let grid = Grid(topRightCoordinate: Coordinate(x: 10, y: 10))
-        let initialCoordinate = Coordinate(x: 0, y: 0)
+        let testCases:[
+            (
+                initialCoordinate: Coordinate,
+                direction: Rover.Direction,
+                command: String,
+                expectedCoordinate: Coordinate
+            )
+        ] = [
+            (Coordinate(x: 0, y: 0), .north, "B", Coordinate(x: 0, y: grid.yEdge)),
+            (Coordinate(x: 0, y: 0), .south, "F", Coordinate(x: 0, y: grid.yEdge)),
+            (Coordinate(x: 0, y: 0), .east, "B", Coordinate(x: grid.xEdge, y: 0)),
+            (Coordinate(x: 0, y: 0), .west, "F", Coordinate(x: grid.xEdge, y: 0))
+        ]
 
-        expectRover(withInitialCoordinate: initialCoordinate, andDirection: .south, onGrid: grid, toMoveTo: Coordinate(x: 0, y: grid.yEdge), withCommands: "F")
-    }
-
-    func test_moveForwardWest_resetsXOnGridEdgeSurpassedToNegativeSide() {
-        let grid = Grid(topRightCoordinate: Coordinate(x: 10, y: 10))
-        let initialCoordinate = Coordinate(x: 0, y: 0)
-
-        expectRover(withInitialCoordinate: initialCoordinate, andDirection: .west, onGrid: grid, toMoveTo: Coordinate(x: grid.xEdge, y: 0), withCommands: "F")
-    }
-
-    func test_moveBackwardNorth_resetsYOnGridEdgeSurpassedToNegativeSide() {
-        let grid = Grid(topRightCoordinate: Coordinate(x: 10, y: 10))
-        let initialCoordinate = Coordinate(x: 0, y: 0)
-
-        expectRover(withInitialCoordinate: initialCoordinate, andDirection: .north, onGrid: grid, toMoveTo: Coordinate(x: 0, y: grid.yEdge), withCommands: "B")
-    }
-
-    func test_moveBackwardEast_resetsXOnGridEdgeSurpassed() {
-        let grid = Grid(topRightCoordinate: Coordinate(x: 10, y: 10))
-        let initialCoordinate = Coordinate(x: 0, y: 0)
-
-        expectRover(withInitialCoordinate: initialCoordinate, andDirection: .east, onGrid: grid, toMoveTo: Coordinate(x: grid.xEdge, y: 0), withCommands: "B")
+        testCases.forEach { (initialCoordinate, direction, command, expectedCoordinate) in
+            expectRover(withInitialCoordinate: initialCoordinate, andDirection: direction, onGrid: grid, toMoveTo: expectedCoordinate, withCommands: command)
+        }
     }
 }
 
+// MARK: - Helpers
 private extension MarsRoverTests {
     func makeSUT(coordinate: Coordinate = Coordinate(x: 0, y: 0), direction: Rover.Direction = .east, grid: Grid = Grid(topRightCoordinate: Coordinate(x: 10, y: 10))) -> Rover {
         return try! Rover(coordinate: coordinate, direction: direction, grid: grid)
