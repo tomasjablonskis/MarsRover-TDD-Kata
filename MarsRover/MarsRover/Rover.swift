@@ -36,7 +36,11 @@ public class Rover {
                 else {
                     coordinate.x -= 1
                 }
-            } else {
+            }
+            else if direction == "S" {
+                coordinate.y -= 1
+            }
+            else {
                 if command == "F" {
                     coordinate.y += 1
                 }
