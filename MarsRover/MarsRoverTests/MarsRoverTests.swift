@@ -234,6 +234,17 @@ class MarsRoverTests: XCTestCase {
 
         XCTAssertEqual(sut.coordinate, Coordinate(x: 0, y: grid.yEdge))
     }
+
+    func test_moveBackwardSouth_resetsYOnGridEdgeSurpassed() {
+        let grid = Grid(topRightCoordinate: Coordinate(x: 10, y: 10))
+        let initialCoordinate = Coordinate(x: 0, y: 10)
+        let direction: Rover.Direction = .south
+        let sut = makeSUT(coordinate: initialCoordinate, direction: direction, grid: grid)
+
+        sut.move(commands: "B")
+
+        XCTAssertEqual(sut.coordinate, Coordinate(x: 0, y: 0))
+    }
 }
 
 private extension MarsRoverTests {
