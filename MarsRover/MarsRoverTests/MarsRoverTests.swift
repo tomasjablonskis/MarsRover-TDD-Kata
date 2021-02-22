@@ -171,6 +171,30 @@ class MarsRoverTests: XCTestCase {
         expect(initialDirection: .north, toTurnTo: .north, withCommands: "LLLL")
         expect(initialDirection: .north, toTurnTo: .west, withCommands: "LLLLL")
     }
+
+    func test_moveLeftEast_changesDirectionCounterClockwise() {
+        expect(initialDirection: .east, toTurnTo: .north, withCommands: "L")
+        expect(initialDirection: .east, toTurnTo: .west, withCommands: "LL")
+        expect(initialDirection: .east, toTurnTo: .south, withCommands: "LLL")
+        expect(initialDirection: .east, toTurnTo: .east, withCommands: "LLLL")
+        expect(initialDirection: .east, toTurnTo: .north, withCommands: "LLLLL")
+    }
+
+    func test_moveLeftSouth_changesDirectionCounterClockwise() {
+        expect(initialDirection: .south, toTurnTo: .east, withCommands: "L")
+        expect(initialDirection: .south, toTurnTo: .north, withCommands: "LL")
+        expect(initialDirection: .south, toTurnTo: .west, withCommands: "LLL")
+        expect(initialDirection: .south, toTurnTo: .south, withCommands: "LLLL")
+        expect(initialDirection: .south, toTurnTo: .east, withCommands: "LLLLL")
+    }
+
+    func test_moveLeftWest_changesDirectionCounterClockwise() {
+        expect(initialDirection: .west, toTurnTo: .south, withCommands: "L")
+        expect(initialDirection: .west, toTurnTo: .east, withCommands: "LL")
+        expect(initialDirection: .west, toTurnTo: .north, withCommands: "LLL")
+        expect(initialDirection: .west, toTurnTo: .west, withCommands: "LLLL")
+        expect(initialDirection: .west, toTurnTo: .south, withCommands: "LLLLL")
+    }
 }
 
 private extension MarsRoverTests {
