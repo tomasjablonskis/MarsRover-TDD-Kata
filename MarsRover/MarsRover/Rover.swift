@@ -19,11 +19,15 @@ public struct Coordinate: Equatable {
 
 public class Rover {
 
-    public enum Direction {
+    public enum Direction: Int {
         case north
         case east
         case south
         case west
+
+        mutating func next() {
+            self = Direction(rawValue: rawValue + 1) ?? Direction(rawValue: 0)!
+        }
     }
 
     public enum Command: Character {
@@ -63,14 +67,8 @@ public class Rover {
             case (.west, .backward):
                 coordinate.x += 1
 
-            case (.north, .right):
-                direction = .east
-            case (.east, .right):
-                direction = .south
-            case (.south, .right):
-                direction = .west
-            case (.west, .right):
-                direction = .north
+            case (_, .right):
+                direction.next()
 
             }
         }
