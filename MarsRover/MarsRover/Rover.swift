@@ -21,14 +21,15 @@ public class Rover {
 
     public enum Direction {
         case north
-        case south
         case east
+        case south
         case west
     }
 
     public enum Command: Character {
         case forward = "F"
         case backward = "B"
+        case right = "R"
     }
 
     private(set) public var coordinate: Coordinate
@@ -39,8 +40,8 @@ public class Rover {
         self.direction = direction
     }
 
-    public func move(command: String) {
-        command.map(\.command).forEach { command in
+    public func move(commands: String) {
+        commands.map(\.command).forEach { command in
             switch (direction, command) {
             case (.north, .forward):
                 coordinate.y += 1
@@ -61,7 +62,9 @@ public class Rover {
                 coordinate.x -= 1
             case (.west, .backward):
                 coordinate.x += 1
-                
+
+            default:
+                direction = .east
             }
         }
     }

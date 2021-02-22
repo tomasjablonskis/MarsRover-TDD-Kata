@@ -24,112 +24,119 @@ class MarsRoverTests: XCTestCase {
         let expectedCoordinate = Coordinate(x: 0, y: 1)
         let sut = makeSUT(coordinate: Coordinate(x: 0, y: 0), direction: .north)
 
-        expect(sut: sut, toMoveTo: expectedCoordinate, withCommand: "F")
+        expect(sut: sut, toMoveTo: expectedCoordinate, withCommands: "F")
     }
 
     func test_moveForwardTwiceNorth_incrementsYCoordinateTwice() {
         let expectedCoordinate = Coordinate(x: 0, y: 2)
         let sut = makeSUT(coordinate: Coordinate(x: 0, y: 0), direction: .north)
 
-        expect(sut: sut, toMoveTo: expectedCoordinate, withCommand: "FF")
+        expect(sut: sut, toMoveTo: expectedCoordinate, withCommands: "FF")
     }
 
     func test_moveBackwardNorth_decrementsYCoordinate() {
         let expectedCoordinate = Coordinate(x: 0, y: 1)
         let sut = makeSUT(coordinate: Coordinate(x: 0, y: 2), direction: .north)
 
-        expect(sut: sut, toMoveTo: expectedCoordinate, withCommand: "B")
+        expect(sut: sut, toMoveTo: expectedCoordinate, withCommands: "B")
     }
 
     func test_moveBackwardNorthTwice_decrementsYCoordinateTwice() {
         let expectedCoordinate = Coordinate(x: 0, y: 0)
         let sut = makeSUT(coordinate: Coordinate(x: 0, y: 2), direction: .north)
 
-        expect(sut: sut, toMoveTo: expectedCoordinate, withCommand: "BB")
+        expect(sut: sut, toMoveTo: expectedCoordinate, withCommands: "BB")
     }
 
     func test_moveForwardEast_incrementsXCoordinate() {
         let expectedCoordinate = Coordinate(x: 1, y: 0)
         let sut = makeSUT(coordinate: Coordinate(x: 0, y: 0), direction: .east)
 
-        expect(sut: sut, toMoveTo: expectedCoordinate, withCommand: "F")
+        expect(sut: sut, toMoveTo: expectedCoordinate, withCommands: "F")
     }
 
     func test_moveForwardEastTwice_incrementsXCoordinateTwice() {
         let expectedCoordinate = Coordinate(x: 2, y: 0)
         let sut = makeSUT(coordinate: Coordinate(x: 0, y: 0), direction: .east)
 
-        expect(sut: sut, toMoveTo: expectedCoordinate, withCommand: "FF")
+        expect(sut: sut, toMoveTo: expectedCoordinate, withCommands: "FF")
     }
 
     func test_moveBackwardEast_decrementsXCoordinate() {
         let expectedCoordinate = Coordinate(x: 1, y: 0)
         let sut = makeSUT(coordinate: Coordinate(x: 2, y: 0), direction: .east)
 
-        expect(sut: sut, toMoveTo: expectedCoordinate, withCommand: "B")
+        expect(sut: sut, toMoveTo: expectedCoordinate, withCommands: "B")
     }
 
     func test_moveBackwardEastTwice_decrementsXCoordinateTwice() {
         let expectedCoordinate = Coordinate(x: 0, y: 0)
         let sut = makeSUT(coordinate: Coordinate(x: 2, y: 0), direction: .east)
 
-        expect(sut: sut, toMoveTo: expectedCoordinate, withCommand: "BB")
+        expect(sut: sut, toMoveTo: expectedCoordinate, withCommands: "BB")
     }
 
     func test_moveForwardSouth_decrementsYCoordinate() {
         let expectedCoordinate = Coordinate(x: 0, y: 1)
         let sut = makeSUT(coordinate: Coordinate(x: 0, y: 2), direction: .south)
 
-        expect(sut: sut, toMoveTo: expectedCoordinate, withCommand: "F")
+        expect(sut: sut, toMoveTo: expectedCoordinate, withCommands: "F")
     }
 
     func test_moveForwardSouthTwice_decrementsYCoordinateTwice() {
         let expectedCoordinate = Coordinate(x: 0, y: 0)
         let sut = makeSUT(coordinate: Coordinate(x: 0, y: 2), direction: .south)
 
-        expect(sut: sut, toMoveTo: expectedCoordinate, withCommand: "FF")
+        expect(sut: sut, toMoveTo: expectedCoordinate, withCommands: "FF")
     }
 
     func test_moveBackwardSouth_incrementsYCoordinate() {
         let expectedCoordinate = Coordinate(x: 0, y: 1)
         let sut = makeSUT(coordinate: Coordinate(x: 0, y: 0), direction: .south)
 
-        expect(sut: sut, toMoveTo: expectedCoordinate, withCommand: "B")
+        expect(sut: sut, toMoveTo: expectedCoordinate, withCommands: "B")
     }
 
     func test_moveBackwardSouthTwice_incrementsYCoordinateTwice() {
         let expectedCoordinate = Coordinate(x: 0, y: 2)
         let sut = makeSUT(coordinate: Coordinate(x: 0, y: 0), direction: .south)
 
-        expect(sut: sut, toMoveTo: expectedCoordinate, withCommand: "BB")
+        expect(sut: sut, toMoveTo: expectedCoordinate, withCommands: "BB")
     }
 
     func test_moveForwardWest_decrementsXCoordinate() {
         let expectedCoordinate = Coordinate(x: 1, y: 0)
         let sut = makeSUT(coordinate: Coordinate(x: 2, y: 0), direction: .west)
 
-        expect(sut: sut, toMoveTo: expectedCoordinate, withCommand: "F")
+        expect(sut: sut, toMoveTo: expectedCoordinate, withCommands: "F")
     }
 
     func test_moveForwardWestTwice_decrementsXCoordinateTwice() {
         let expectedCoordinate = Coordinate(x: 0, y: 0)
         let sut = makeSUT(coordinate: Coordinate(x: 2, y: 0), direction: .west)
 
-        expect(sut: sut, toMoveTo: expectedCoordinate, withCommand: "FF")
+        expect(sut: sut, toMoveTo: expectedCoordinate, withCommands: "FF")
     }
 
     func test_moveBackwardWest_incrementsXCoordinate() {
         let expectedCoordinate = Coordinate(x: 1, y: 0)
         let sut = makeSUT(coordinate: Coordinate(x: 0, y: 0), direction: .west)
 
-        expect(sut: sut, toMoveTo: expectedCoordinate, withCommand: "B")
+        expect(sut: sut, toMoveTo: expectedCoordinate, withCommands: "B")
     }
 
     func test_moveBackwardWestTwice_incrementsXCoordinateTwice() {
         let expectedCoordinate = Coordinate(x: 2, y: 0)
         let sut = makeSUT(coordinate: Coordinate(x: 0, y: 0), direction: .west)
 
-        expect(sut: sut, toMoveTo: expectedCoordinate, withCommand: "BB")
+        expect(sut: sut, toMoveTo: expectedCoordinate, withCommands: "BB")
+    }
+
+    func test_moveRightNorth_changesDirectionToEast() {
+        let expectedDirection: Rover.Direction = .east
+        let sut = makeSUT(direction: .north)
+
+        expect(sut: sut, toTurnTo: expectedDirection, withCommands: "R")
     }
 }
 
@@ -138,9 +145,15 @@ private extension MarsRoverTests {
         return Rover(coordinate: coordinate, direction: direction)
     }
 
-    func expect(sut: Rover, toMoveTo coordinate: Coordinate, withCommand command: String, file: StaticString = #file, line: UInt = #line) {
-        sut.move(command: command)
+    func expect(sut: Rover, toMoveTo coordinate: Coordinate, withCommands commands: String, file: StaticString = #file, line: UInt = #line) {
+        sut.move(commands: commands)
 
         XCTAssertEqual(sut.coordinate, coordinate, file: file, line: line)
+    }
+
+    func expect(sut: Rover, toTurnTo direction: Rover.Direction, withCommands commands: String, file: StaticString = #file, line: UInt = #line) {
+        sut.move(commands: commands)
+
+        XCTAssertEqual(sut.direction, direction, file: file, line: line)
     }
 }
