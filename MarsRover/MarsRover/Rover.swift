@@ -28,8 +28,13 @@ public class Rover {
     }
 
     public func move(command: String) {
-        command.forEach { _ in
-            coordinate.y += 1
+        command.forEach { command in
+            if command == "F" {
+                coordinate.y += 1
+            }
+            else {
+                coordinate.y -= 1
+            }
         }
     }
 }

@@ -31,9 +31,14 @@ class MarsRoverTests: XCTestCase {
         let expectedCoordinate = Coordinate(x: 0, y: 2)
         let sut = makeSUT(coordinate: Coordinate(x: 0, y: 0), direction: "N")
 
-        sut.move(command: "FF")
+        expect(sut: sut, toMoveTo: expectedCoordinate, withCommand: "FF")
+    }
 
-        XCTAssertEqual(sut.coordinate, expectedCoordinate)
+    func test_moveBackwardNorth_decrementsYCoordinate() {
+        let expectedCoordinate = Coordinate(x: 0, y: 1)
+        let sut = makeSUT(coordinate: Coordinate(x: 0, y: 2), direction: "N")
+
+        expect(sut: sut, toMoveTo: expectedCoordinate, withCommand: "B")
     }
 }
 
