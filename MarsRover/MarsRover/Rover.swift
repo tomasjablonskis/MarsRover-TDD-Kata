@@ -29,11 +29,15 @@ public class Rover {
 
     public func move(command: String) {
         command.forEach { command in
-            if command == "F" {
-                coordinate.y += 1
-            }
-            else {
-                coordinate.y -= 1
+            if direction == "E" {
+                coordinate.x += 1
+            } else {
+                if command == "F" {
+                    coordinate.y += 1
+                }
+                else {
+                    coordinate.y -= 1
+                }
             }
         }
     }
