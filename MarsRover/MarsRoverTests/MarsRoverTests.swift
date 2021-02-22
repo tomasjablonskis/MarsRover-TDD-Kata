@@ -21,10 +21,18 @@ class MarsRoverTests: XCTestCase {
     }
 
     func test_init_throwsErrorOnOutOfBoundsInitialCoordinate() {
-        let invalidInitialCoordinate = Coordinate(x: 100, y: 0)
-        let grid = Grid(topRightCoordinate: Coordinate(x: 0, y: 0))
+        let testCases = [Coordinate(x: -1, y: 0),
+                         Coordinate(x: 0, y: -1),
+                         Coordinate(x: -1, y: -1),
+                         Coordinate(x: 1, y: 0),
+                         Coordinate(x: 0, y: 1),
+                         Coordinate(x: 1, y: 1)]
 
-        XCTAssertThrowsError(try Rover(coordinate: invalidInitialCoordinate, direction: .north, grid: grid))
+        testCases.forEach { invalidInitialCoordinate in
+            let grid = Grid(topRightCoordinate: Coordinate(x: 0, y: 0))
+
+            XCTAssertNil(try? Rover(coordinate: invalidInitialCoordinate, direction: .north, grid: grid))
+        }
     }
 
     func test_moveForwardNorth_incrementsYCoordinate() {
