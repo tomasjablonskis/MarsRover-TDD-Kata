@@ -24,9 +24,7 @@ class MarsRoverTests: XCTestCase {
         let expectedCoordinate = Coordinate(x: 0, y: 1)
         let sut = makeSUT(coordinate: Coordinate(x: 0, y: 0), direction: "N")
 
-        sut.move(command: "F")
-
-        XCTAssertEqual(sut.coordinate, expectedCoordinate)
+        expect(sut: sut, toMoveTo: expectedCoordinate, withCommand: "F")
     }
 
     func test_moveForwardTwiceNorth_incrementsYCoordinateTwice() {
@@ -42,5 +40,11 @@ class MarsRoverTests: XCTestCase {
 private extension MarsRoverTests {
     func makeSUT(coordinate: Coordinate = Coordinate(x: 0, y: 0), direction: String = "E") -> Rover {
         return Rover(coordinate: coordinate, direction: direction)
+    }
+
+    func expect(sut: Rover, toMoveTo coordinate: Coordinate, withCommand command: String, file: StaticString = #file, line: UInt = #line) {
+        sut.move(command: command)
+
+        XCTAssertEqual(sut.coordinate, coordinate, file: file, line: line)
     }
 }
