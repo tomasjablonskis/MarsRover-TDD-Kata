@@ -50,7 +50,7 @@ public class Rover {
                     coordinate.x -= 1
                 }
                 else {
-                    coordinate.x = 1
+                    coordinate.x += 1
                 }
             }
             else {
