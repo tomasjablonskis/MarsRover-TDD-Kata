@@ -133,17 +133,11 @@ class MarsRoverTests: XCTestCase {
     }
 
     func test_moveRightNorth_changesDirectionToEast() {
-        let expectedDirection: Rover.Direction = .east
-        let sut = makeSUT(direction: .north)
-
-        expect(sut: sut, toTurnTo: expectedDirection, withCommands: "R")
+        expect(initialDirection: .north, toTurnTo: .east, withCommands: "R")
     }
 
     func test_moveRightNorthTwice_changesDirectionToSouth() {
-        let expectedDirection: Rover.Direction = .south
-        let sut = makeSUT(direction: .north)
-
-        expect(sut: sut, toTurnTo: expectedDirection, withCommands: "RR")
+        expect(initialDirection: .north, toTurnTo: .south, withCommands: "RR")
     }
 }
 
@@ -162,5 +156,13 @@ private extension MarsRoverTests {
         sut.move(commands: commands)
 
         XCTAssertEqual(sut.direction, direction, file: file, line: line)
+    }
+
+    func expect(initialDirection: Rover.Direction, toTurnTo expectedDirection: Rover.Direction, withCommands commands: String, file: StaticString = #file, line: UInt = #line) {
+        let sut = makeSUT(direction: initialDirection)
+
+        sut.move(commands: commands)
+
+        XCTAssertEqual(sut.direction, expectedDirection, file: file, line: line)
     }
 }
