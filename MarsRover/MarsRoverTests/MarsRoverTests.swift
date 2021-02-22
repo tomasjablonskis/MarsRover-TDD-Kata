@@ -118,6 +118,12 @@ class MarsRoverTests: XCTestCase {
         expect(sut: sut, toMoveTo: expectedCoordinate, withCommand: "FF")
     }
 
+    func test_moveBackwardWest_incrementsXCoordinate() {
+        let expectedCoordinate = Coordinate(x: 1, y: 0)
+        let sut = makeSUT(coordinate: Coordinate(x: 0, y: 0), direction: "W")
+
+        expect(sut: sut, toMoveTo: expectedCoordinate, withCommand: "B")
+    }
 }
 
 private extension MarsRoverTests {

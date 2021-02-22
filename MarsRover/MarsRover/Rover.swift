@@ -46,7 +46,12 @@ public class Rover {
                 }
             }
             else if direction == "W" {
-                coordinate.x -= 1
+                if command == "F" {
+                    coordinate.x -= 1
+                }
+                else {
+                    coordinate.x = 1
+                }
             }
             else {
                 if command == "F" {
