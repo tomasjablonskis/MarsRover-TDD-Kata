@@ -20,8 +20,8 @@ class MarsRoverTests: XCTestCase {
         XCTAssertEqual(rover.direction, initialDirection)
     }
 
-    func test_init_throwsErrorOnNegativeInitialCoordinate() {
-        let invalidInitialCoordinate = Coordinate(x: -1, y: 0)
+    func test_init_throwsErrorOnOutOfBoundsInitialCoordinate() {
+        let invalidInitialCoordinate = Coordinate(x: 100, y: 0)
         let grid = Grid(topRightCoordinate: Coordinate(x: 0, y: 0))
 
         XCTAssertThrowsError(try Rover(coordinate: invalidInitialCoordinate, direction: .north, grid: grid))

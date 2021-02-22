@@ -23,6 +23,14 @@ public struct Grid {
     public init(topRightCoordinate: Coordinate) {
         self.topRightCoordinate = topRightCoordinate
     }
+
+    var xEdge: Int {
+        topRightCoordinate.x
+    }
+
+    var yEdge: Int {
+        topRightCoordinate.y
+    }
 }
 
 public class Rover {
@@ -55,16 +63,17 @@ public class Rover {
     private let grid: Grid
 
     private enum Error: Swift.Error {
-        case negativeInitialCoordinate
+        case initialCoordinateOutOfBounds
     }
 
     public init(coordinate: Coordinate, direction: Direction, grid: Grid) throws {
-        guard coordinate.x >= 0 && coordinate.y >= 0 else {
-            throw Error.negativeInitialCoordinate
-        }
         self.coordinate = coordinate
         self.direction = direction
         self.grid = grid
+
+        if isOutOfBounds() {
+            throw Error.initialCoordinateOutOfBounds
+        }
     }
 
     public func move(commands: String) {
@@ -93,6 +102,10 @@ public class Rover {
                 direction.previous()
             }
         }
+    }
+
+    private func isOutOfBounds() -> Bool {
+        coordinate.x < 0 || coordinate.y < 0 || coordinate.x > grid.xEdge || coordinate.y > grid.yEdge
     }
 }
 
