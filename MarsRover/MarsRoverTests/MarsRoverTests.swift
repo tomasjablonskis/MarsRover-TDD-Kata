@@ -133,67 +133,67 @@ class MarsRoverTests: XCTestCase {
     }
 
     func test_moveRightNorth_changesDirectionClockwise() {
-        expect(initialDirection: .north, toTurnTo: .east, withCommands: "R")
-        expect(initialDirection: .north, toTurnTo: .south, withCommands: "RR")
-        expect(initialDirection: .north, toTurnTo: .west, withCommands: "RRR")
-        expect(initialDirection: .north, toTurnTo: .north, withCommands: "RRRR")
-        expect(initialDirection: .north, toTurnTo: .east, withCommands: "RRRRR")
+        expectRover(withInitialDirection: .north, toTurnTo: .east, withCommands: "R")
+        expectRover(withInitialDirection: .north, toTurnTo: .south, withCommands: "RR")
+        expectRover(withInitialDirection: .north, toTurnTo: .west, withCommands: "RRR")
+        expectRover(withInitialDirection: .north, toTurnTo: .north, withCommands: "RRRR")
+        expectRover(withInitialDirection: .north, toTurnTo: .east, withCommands: "RRRRR")
     }
 
     func test_moveRightEast_changesDirectionClockwise() {
-        expect(initialDirection: .east, toTurnTo: .south, withCommands: "R")
-        expect(initialDirection: .east, toTurnTo: .west, withCommands: "RR")
-        expect(initialDirection: .east, toTurnTo: .north, withCommands: "RRR")
-        expect(initialDirection: .east, toTurnTo: .east, withCommands: "RRRR")
-        expect(initialDirection: .east, toTurnTo: .south, withCommands: "RRRRR")
+        expectRover(withInitialDirection: .east, toTurnTo: .south, withCommands: "R")
+        expectRover(withInitialDirection: .east, toTurnTo: .west, withCommands: "RR")
+        expectRover(withInitialDirection: .east, toTurnTo: .north, withCommands: "RRR")
+        expectRover(withInitialDirection: .east, toTurnTo: .east, withCommands: "RRRR")
+        expectRover(withInitialDirection: .east, toTurnTo: .south, withCommands: "RRRRR")
     }
 
     func test_moveRightSouth_changesDirectionClockwise() {
-        expect(initialDirection: .south, toTurnTo: .west, withCommands: "R")
-        expect(initialDirection: .south, toTurnTo: .north, withCommands: "RR")
-        expect(initialDirection: .south, toTurnTo: .east, withCommands: "RRR")
-        expect(initialDirection: .south, toTurnTo: .south, withCommands: "RRRR")
-        expect(initialDirection: .south, toTurnTo: .west, withCommands: "RRRRR")
+        expectRover(withInitialDirection: .south, toTurnTo: .west, withCommands: "R")
+        expectRover(withInitialDirection: .south, toTurnTo: .north, withCommands: "RR")
+        expectRover(withInitialDirection: .south, toTurnTo: .east, withCommands: "RRR")
+        expectRover(withInitialDirection: .south, toTurnTo: .south, withCommands: "RRRR")
+        expectRover(withInitialDirection: .south, toTurnTo: .west, withCommands: "RRRRR")
     }
 
     func test_moveRightWest_changesDirectionClockwise() {
-        expect(initialDirection: .west, toTurnTo: .north, withCommands: "R")
-        expect(initialDirection: .west, toTurnTo: .east, withCommands: "RR")
-        expect(initialDirection: .west, toTurnTo: .south, withCommands: "RRR")
-        expect(initialDirection: .west, toTurnTo: .west, withCommands: "RRRR")
-        expect(initialDirection: .west, toTurnTo: .north, withCommands: "RRRRR")
+        expectRover(withInitialDirection: .west, toTurnTo: .north, withCommands: "R")
+        expectRover(withInitialDirection: .west, toTurnTo: .east, withCommands: "RR")
+        expectRover(withInitialDirection: .west, toTurnTo: .south, withCommands: "RRR")
+        expectRover(withInitialDirection: .west, toTurnTo: .west, withCommands: "RRRR")
+        expectRover(withInitialDirection: .west, toTurnTo: .north, withCommands: "RRRRR")
     }
 
     func test_moveLeftNorth_changesDirectionCounterClockwise() {
-        expect(initialDirection: .north, toTurnTo: .west, withCommands: "L")
-        expect(initialDirection: .north, toTurnTo: .south, withCommands: "LL")
-        expect(initialDirection: .north, toTurnTo: .east, withCommands: "LLL")
-        expect(initialDirection: .north, toTurnTo: .north, withCommands: "LLLL")
-        expect(initialDirection: .north, toTurnTo: .west, withCommands: "LLLLL")
+        expectRover(withInitialDirection: .north, toTurnTo: .west, withCommands: "L")
+        expectRover(withInitialDirection: .north, toTurnTo: .south, withCommands: "LL")
+        expectRover(withInitialDirection: .north, toTurnTo: .east, withCommands: "LLL")
+        expectRover(withInitialDirection: .north, toTurnTo: .north, withCommands: "LLLL")
+        expectRover(withInitialDirection: .north, toTurnTo: .west, withCommands: "LLLLL")
     }
 
     func test_moveLeftEast_changesDirectionCounterClockwise() {
-        expect(initialDirection: .east, toTurnTo: .north, withCommands: "L")
-        expect(initialDirection: .east, toTurnTo: .west, withCommands: "LL")
-        expect(initialDirection: .east, toTurnTo: .south, withCommands: "LLL")
-        expect(initialDirection: .east, toTurnTo: .east, withCommands: "LLLL")
-        expect(initialDirection: .east, toTurnTo: .north, withCommands: "LLLLL")
+        expectRover(withInitialDirection: .east, toTurnTo: .north, withCommands: "L")
+        expectRover(withInitialDirection: .east, toTurnTo: .west, withCommands: "LL")
+        expectRover(withInitialDirection: .east, toTurnTo: .south, withCommands: "LLL")
+        expectRover(withInitialDirection: .east, toTurnTo: .east, withCommands: "LLLL")
+        expectRover(withInitialDirection: .east, toTurnTo: .north, withCommands: "LLLLL")
     }
 
     func test_moveLeftSouth_changesDirectionCounterClockwise() {
-        expect(initialDirection: .south, toTurnTo: .east, withCommands: "L")
-        expect(initialDirection: .south, toTurnTo: .north, withCommands: "LL")
-        expect(initialDirection: .south, toTurnTo: .west, withCommands: "LLL")
-        expect(initialDirection: .south, toTurnTo: .south, withCommands: "LLLL")
-        expect(initialDirection: .south, toTurnTo: .east, withCommands: "LLLLL")
+        expectRover(withInitialDirection: .south, toTurnTo: .east, withCommands: "L")
+        expectRover(withInitialDirection: .south, toTurnTo: .north, withCommands: "LL")
+        expectRover(withInitialDirection: .south, toTurnTo: .west, withCommands: "LLL")
+        expectRover(withInitialDirection: .south, toTurnTo: .south, withCommands: "LLLL")
+        expectRover(withInitialDirection: .south, toTurnTo: .east, withCommands: "LLLLL")
     }
 
     func test_moveLeftWest_changesDirectionCounterClockwise() {
-        expect(initialDirection: .west, toTurnTo: .south, withCommands: "L")
-        expect(initialDirection: .west, toTurnTo: .east, withCommands: "LL")
-        expect(initialDirection: .west, toTurnTo: .north, withCommands: "LLL")
-        expect(initialDirection: .west, toTurnTo: .west, withCommands: "LLLL")
-        expect(initialDirection: .west, toTurnTo: .south, withCommands: "LLLLL")
+        expectRover(withInitialDirection: .west, toTurnTo: .south, withCommands: "L")
+        expectRover(withInitialDirection: .west, toTurnTo: .east, withCommands: "LL")
+        expectRover(withInitialDirection: .west, toTurnTo: .north, withCommands: "LLL")
+        expectRover(withInitialDirection: .west, toTurnTo: .west, withCommands: "LLLL")
+        expectRover(withInitialDirection: .west, toTurnTo: .south, withCommands: "LLLLL")
     }
 }
 
@@ -214,8 +214,8 @@ private extension MarsRoverTests {
         XCTAssertEqual(sut.direction, direction, file: file, line: line)
     }
 
-    func expect(initialDirection: Rover.Direction, toTurnTo expectedDirection: Rover.Direction, withCommands commands: String, file: StaticString = #file, line: UInt = #line) {
-        let sut = makeSUT(direction: initialDirection)
+    func expectRover(withInitialDirection: Rover.Direction, toTurnTo expectedDirection: Rover.Direction, withCommands commands: String, file: StaticString = #file, line: UInt = #line) {
+        let sut = makeSUT(direction: withInitialDirection)
 
         sut.move(commands: commands)
 
