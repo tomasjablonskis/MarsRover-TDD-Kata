@@ -147,6 +147,14 @@ class MarsRoverTests: XCTestCase {
         expect(initialDirection: .east, toTurnTo: .east, withCommands: "RRRR")
         expect(initialDirection: .east, toTurnTo: .south, withCommands: "RRRRR")
     }
+
+    func test_moveRightSouth_changesDirectionClockwise() {
+        expect(initialDirection: .south, toTurnTo: .west, withCommands: "R")
+        expect(initialDirection: .south, toTurnTo: .north, withCommands: "RR")
+        expect(initialDirection: .south, toTurnTo: .east, withCommands: "RRR")
+        expect(initialDirection: .south, toTurnTo: .south, withCommands: "RRRR")
+        expect(initialDirection: .south, toTurnTo: .west, withCommands: "RRRRR")
+    }
 }
 
 private extension MarsRoverTests {
