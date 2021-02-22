@@ -36,116 +36,85 @@ class MarsRoverTests: XCTestCase {
     }
 
     func test_moveForwardNorth_incrementsYCoordinate() {
-        let expectedCoordinate = Coordinate(x: 0, y: 1)
-        let sut = makeSUT(coordinate: Coordinate(x: 0, y: 0), direction: .north)
+        let initialCoordinate = Coordinate(x: 0, y: 0)
 
-        expect(sut: sut, toMoveTo: expectedCoordinate, withCommands: "F")
-    }
-
-    func test_moveForwardTwiceNorth_incrementsYCoordinateTwice() {
-        let expectedCoordinate = Coordinate(x: 0, y: 2)
-        let sut = makeSUT(coordinate: Coordinate(x: 0, y: 0), direction: .north)
-
-        expect(sut: sut, toMoveTo: expectedCoordinate, withCommands: "FF")
+        expectRover(withInitialCoordinate: initialCoordinate, andDirection: .north, toMoveTo: Coordinate(x: 0, y: 1), withCommands: "F")
+        expectRover(withInitialCoordinate: initialCoordinate, andDirection: .north, toMoveTo: Coordinate(x: 0, y: 2), withCommands: "FF")
+        expectRover(withInitialCoordinate: initialCoordinate, andDirection: .north, toMoveTo: Coordinate(x: 0, y: 3), withCommands: "FFF")
+        expectRover(withInitialCoordinate: initialCoordinate, andDirection: .north, toMoveTo: Coordinate(x: 0, y: 4), withCommands: "FFFF")
+        expectRover(withInitialCoordinate: initialCoordinate, andDirection: .north, toMoveTo: Coordinate(x: 0, y: 5), withCommands: "FFFFF")
     }
 
     func test_moveBackwardNorth_decrementsYCoordinate() {
-        let expectedCoordinate = Coordinate(x: 0, y: 1)
-        let sut = makeSUT(coordinate: Coordinate(x: 0, y: 2), direction: .north)
+        let initialCoordinate = Coordinate(x: 0, y: 5)
 
-        expect(sut: sut, toMoveTo: expectedCoordinate, withCommands: "B")
-    }
-
-    func test_moveBackwardNorthTwice_decrementsYCoordinateTwice() {
-        let expectedCoordinate = Coordinate(x: 0, y: 0)
-        let sut = makeSUT(coordinate: Coordinate(x: 0, y: 2), direction: .north)
-
-        expect(sut: sut, toMoveTo: expectedCoordinate, withCommands: "BB")
+        expectRover(withInitialCoordinate: initialCoordinate, andDirection: .north, toMoveTo: Coordinate(x: 0, y: 4), withCommands: "B")
+        expectRover(withInitialCoordinate: initialCoordinate, andDirection: .north, toMoveTo: Coordinate(x: 0, y: 3), withCommands: "BB")
+        expectRover(withInitialCoordinate: initialCoordinate, andDirection: .north, toMoveTo: Coordinate(x: 0, y: 2), withCommands: "BBB")
+        expectRover(withInitialCoordinate: initialCoordinate, andDirection: .north, toMoveTo: Coordinate(x: 0, y: 1), withCommands: "BBBB")
+        expectRover(withInitialCoordinate: initialCoordinate, andDirection: .north, toMoveTo: Coordinate(x: 0, y: 0), withCommands: "BBBBB")
     }
 
     func test_moveForwardEast_incrementsXCoordinate() {
-        let expectedCoordinate = Coordinate(x: 1, y: 0)
-        let sut = makeSUT(coordinate: Coordinate(x: 0, y: 0), direction: .east)
+        let initialCoordinate = Coordinate(x: 0, y: 0)
 
-        expect(sut: sut, toMoveTo: expectedCoordinate, withCommands: "F")
-    }
-
-    func test_moveForwardEastTwice_incrementsXCoordinateTwice() {
-        let expectedCoordinate = Coordinate(x: 2, y: 0)
-        let sut = makeSUT(coordinate: Coordinate(x: 0, y: 0), direction: .east)
-
-        expect(sut: sut, toMoveTo: expectedCoordinate, withCommands: "FF")
+        expectRover(withInitialCoordinate: initialCoordinate, andDirection: .east, toMoveTo: Coordinate(x: 1, y: 0), withCommands: "F")
+        expectRover(withInitialCoordinate: initialCoordinate, andDirection: .east, toMoveTo: Coordinate(x: 2, y: 0), withCommands: "FF")
+        expectRover(withInitialCoordinate: initialCoordinate, andDirection: .east, toMoveTo: Coordinate(x: 3, y: 0), withCommands: "FFF")
+        expectRover(withInitialCoordinate: initialCoordinate, andDirection: .east, toMoveTo: Coordinate(x: 4, y: 0), withCommands: "FFFF")
+        expectRover(withInitialCoordinate: initialCoordinate, andDirection: .east, toMoveTo: Coordinate(x: 5, y: 0), withCommands: "FFFFF")
     }
 
     func test_moveBackwardEast_decrementsXCoordinate() {
-        let expectedCoordinate = Coordinate(x: 1, y: 0)
-        let sut = makeSUT(coordinate: Coordinate(x: 2, y: 0), direction: .east)
+        let initialCoordinate = Coordinate(x: 5, y: 0)
 
-        expect(sut: sut, toMoveTo: expectedCoordinate, withCommands: "B")
-    }
-
-    func test_moveBackwardEastTwice_decrementsXCoordinateTwice() {
-        let expectedCoordinate = Coordinate(x: 0, y: 0)
-        let sut = makeSUT(coordinate: Coordinate(x: 2, y: 0), direction: .east)
-
-        expect(sut: sut, toMoveTo: expectedCoordinate, withCommands: "BB")
+        expectRover(withInitialCoordinate: initialCoordinate, andDirection: .east, toMoveTo: Coordinate(x: 4, y: 0), withCommands: "B")
+        expectRover(withInitialCoordinate: initialCoordinate, andDirection: .east, toMoveTo: Coordinate(x: 3, y: 0), withCommands: "BB")
+        expectRover(withInitialCoordinate: initialCoordinate, andDirection: .east, toMoveTo: Coordinate(x: 2, y: 0), withCommands: "BBB")
+        expectRover(withInitialCoordinate: initialCoordinate, andDirection: .east, toMoveTo: Coordinate(x: 1, y: 0), withCommands: "BBBB")
+        expectRover(withInitialCoordinate: initialCoordinate, andDirection: .east, toMoveTo: Coordinate(x: 0, y: 0), withCommands: "BBBBB")
     }
 
     func test_moveForwardSouth_decrementsYCoordinate() {
-        let expectedCoordinate = Coordinate(x: 0, y: 1)
-        let sut = makeSUT(coordinate: Coordinate(x: 0, y: 2), direction: .south)
+        let initialCoordinate = Coordinate(x: 0, y: 5)
 
-        expect(sut: sut, toMoveTo: expectedCoordinate, withCommands: "F")
-    }
-
-    func test_moveForwardSouthTwice_decrementsYCoordinateTwice() {
-        let expectedCoordinate = Coordinate(x: 0, y: 0)
-        let sut = makeSUT(coordinate: Coordinate(x: 0, y: 2), direction: .south)
-
-        expect(sut: sut, toMoveTo: expectedCoordinate, withCommands: "FF")
+        expectRover(withInitialCoordinate: initialCoordinate, andDirection: .south, toMoveTo: Coordinate(x: 0, y: 4), withCommands: "F")
+        expectRover(withInitialCoordinate: initialCoordinate, andDirection: .south, toMoveTo: Coordinate(x: 0, y: 3), withCommands: "FF")
+        expectRover(withInitialCoordinate: initialCoordinate, andDirection: .south, toMoveTo: Coordinate(x: 0, y: 2), withCommands: "FFF")
+        expectRover(withInitialCoordinate: initialCoordinate, andDirection: .south, toMoveTo: Coordinate(x: 0, y: 1), withCommands: "FFFF")
+        expectRover(withInitialCoordinate: initialCoordinate, andDirection: .south, toMoveTo: Coordinate(x: 0, y: 0), withCommands: "FFFFF")
     }
 
     func test_moveBackwardSouth_incrementsYCoordinate() {
-        let expectedCoordinate = Coordinate(x: 0, y: 1)
-        let sut = makeSUT(coordinate: Coordinate(x: 0, y: 0), direction: .south)
+        let initialCoordinate = Coordinate(x: 0, y: 0)
 
-        expect(sut: sut, toMoveTo: expectedCoordinate, withCommands: "B")
-    }
-
-    func test_moveBackwardSouthTwice_incrementsYCoordinateTwice() {
-        let expectedCoordinate = Coordinate(x: 0, y: 2)
-        let sut = makeSUT(coordinate: Coordinate(x: 0, y: 0), direction: .south)
-
-        expect(sut: sut, toMoveTo: expectedCoordinate, withCommands: "BB")
+        expectRover(withInitialCoordinate: initialCoordinate, andDirection: .south, toMoveTo: Coordinate(x: 0, y: 1), withCommands: "B")
+        expectRover(withInitialCoordinate: initialCoordinate, andDirection: .south, toMoveTo: Coordinate(x: 0, y: 2), withCommands: "BB")
+        expectRover(withInitialCoordinate: initialCoordinate, andDirection: .south, toMoveTo: Coordinate(x: 0, y: 3), withCommands: "BBB")
+        expectRover(withInitialCoordinate: initialCoordinate, andDirection: .south, toMoveTo: Coordinate(x: 0, y: 4), withCommands: "BBBB")
+        expectRover(withInitialCoordinate: initialCoordinate, andDirection: .south, toMoveTo: Coordinate(x: 0, y: 5), withCommands: "BBBBB")
     }
 
     func test_moveForwardWest_decrementsXCoordinate() {
-        let expectedCoordinate = Coordinate(x: 1, y: 0)
-        let sut = makeSUT(coordinate: Coordinate(x: 2, y: 0), direction: .west)
+        let initialCoordinate = Coordinate(x: 5, y: 0)
 
-        expect(sut: sut, toMoveTo: expectedCoordinate, withCommands: "F")
-    }
-
-    func test_moveForwardWestTwice_decrementsXCoordinateTwice() {
-        let expectedCoordinate = Coordinate(x: 0, y: 0)
-        let sut = makeSUT(coordinate: Coordinate(x: 2, y: 0), direction: .west)
-
-        expect(sut: sut, toMoveTo: expectedCoordinate, withCommands: "FF")
+        expectRover(withInitialCoordinate: initialCoordinate, andDirection: .west, toMoveTo: Coordinate(x: 4, y: 0), withCommands: "F")
+        expectRover(withInitialCoordinate: initialCoordinate, andDirection: .west, toMoveTo: Coordinate(x: 3, y: 0), withCommands: "FF")
+        expectRover(withInitialCoordinate: initialCoordinate, andDirection: .west, toMoveTo: Coordinate(x: 2, y: 0), withCommands: "FFF")
+        expectRover(withInitialCoordinate: initialCoordinate, andDirection: .west, toMoveTo: Coordinate(x: 1, y: 0), withCommands: "FFFF")
+        expectRover(withInitialCoordinate: initialCoordinate, andDirection: .west, toMoveTo: Coordinate(x: 0, y: 0), withCommands: "FFFFF")
     }
 
     func test_moveBackwardWest_incrementsXCoordinate() {
-        let expectedCoordinate = Coordinate(x: 1, y: 0)
-        let sut = makeSUT(coordinate: Coordinate(x: 0, y: 0), direction: .west)
+        let initialCoordinate = Coordinate(x: 0, y: 0)
 
-        expect(sut: sut, toMoveTo: expectedCoordinate, withCommands: "B")
+        expectRover(withInitialCoordinate: initialCoordinate, andDirection: .west, toMoveTo: Coordinate(x: 1, y: 0), withCommands: "B")
+        expectRover(withInitialCoordinate: initialCoordinate, andDirection: .west, toMoveTo: Coordinate(x: 2, y: 0), withCommands: "BB")
+        expectRover(withInitialCoordinate: initialCoordinate, andDirection: .west, toMoveTo: Coordinate(x: 3, y: 0), withCommands: "BBB")
+        expectRover(withInitialCoordinate: initialCoordinate, andDirection: .west, toMoveTo: Coordinate(x: 4, y: 0), withCommands: "BBBB")
+        expectRover(withInitialCoordinate: initialCoordinate, andDirection: .west, toMoveTo: Coordinate(x: 5, y: 0), withCommands: "BBBBB")
     }
 
-    func test_moveBackwardWestTwice_incrementsXCoordinateTwice() {
-        let expectedCoordinate = Coordinate(x: 2, y: 0)
-        let sut = makeSUT(coordinate: Coordinate(x: 0, y: 0), direction: .west)
-
-        expect(sut: sut, toMoveTo: expectedCoordinate, withCommands: "BB")
-    }
 
     func test_moveRightNorth_changesDirectionClockwise() {
         expectRover(withInitialDirection: .north, toTurnTo: .east, withCommands: "R")
@@ -217,10 +186,12 @@ private extension MarsRoverTests {
         return try! Rover(coordinate: coordinate, direction: direction, grid: grid)
     }
 
-    func expect(sut: Rover, toMoveTo coordinate: Coordinate, withCommands commands: String, file: StaticString = #file, line: UInt = #line) {
+    func expectRover(withInitialCoordinate initialCoordinate: Coordinate, andDirection initialDirection: Rover.Direction, toMoveTo expectedCoordinate: Coordinate, withCommands commands: String, file: StaticString = #file, line: UInt = #line) {
+        let sut = makeSUT(coordinate: initialCoordinate, direction: initialDirection)
+
         sut.move(commands: commands)
 
-        XCTAssertEqual(sut.coordinate, coordinate, file: file, line: line)
+        XCTAssertEqual(sut.coordinate, expectedCoordinate, file: file, line: line)
     }
 
     func expectRover(withInitialDirection: Rover.Direction, toTurnTo expectedDirection: Rover.Direction, withCommands commands: String, file: StaticString = #file, line: UInt = #line) {
