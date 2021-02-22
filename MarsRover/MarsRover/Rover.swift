@@ -30,7 +30,12 @@ public class Rover {
     public func move(command: String) {
         command.forEach { command in
             if direction == "E" {
-                coordinate.x += 1
+                if command == "F" {
+                    coordinate.x += 1
+                }
+                else {
+                    coordinate.x -= 1
+                }
             } else {
                 if command == "F" {
                     coordinate.y += 1
