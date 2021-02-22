@@ -19,48 +19,56 @@ public struct Coordinate: Equatable {
 
 public class Rover {
 
-    private(set) public var coordinate: Coordinate
-    private(set) public var direction: String
+    public enum Direction {
+        case north
+        case south
+        case east
+        case west
+    }
 
-    public init(coordinate: Coordinate, direction: String) {
+    public enum Command: Character {
+        case forward = "F"
+        case backward = "B"
+    }
+
+    private(set) public var coordinate: Coordinate
+    private(set) public var direction: Direction
+
+    public init(coordinate: Coordinate, direction: Direction) {
         self.coordinate = coordinate
         self.direction = direction
     }
 
     public func move(command: String) {
-        command.forEach { command in
-            if direction == "E" {
-                if command == "F" {
-                    coordinate.x += 1
-                }
-                else {
-                    coordinate.x -= 1
-                }
-            }
-            else if direction == "S" {
-                if command == "F" {
-                    coordinate.y -= 1
-                }
-                else {
-                    coordinate.y += 1
-                }
-            }
-            else if direction == "W" {
-                if command == "F" {
-                    coordinate.x -= 1
-                }
-                else {
-                    coordinate.x += 1
-                }
-            }
-            else {
-                if command == "F" {
-                    coordinate.y += 1
-                }
-                else {
-                    coordinate.y -= 1
-                }
+        command.map(\.command).forEach { command in
+            switch (direction, command) {
+            case (.north, .forward):
+                coordinate.y += 1
+            case (.north, .backward):
+                coordinate.y -= 1
+
+            case (.south, .forward):
+                coordinate.y -= 1
+            case (.south, .backward):
+                coordinate.y += 1
+
+            case (.east, .forward):
+                coordinate.x += 1
+            case (.east, .backward):
+                coordinate.x -= 1
+
+            case (.west, .forward):
+                coordinate.x -= 1
+            case (.west, .backward):
+                coordinate.x += 1
+                
             }
         }
+    }
+}
+
+private extension Character {
+    var command: Rover.Command {
+        Rover.Command(rawValue: self)!
     }
 }
