@@ -24,11 +24,11 @@ public struct Grid {
         self.topRightCoordinate = topRightCoordinate
     }
 
-    var xEdge: Int {
+    public var xEdge: Int {
         topRightCoordinate.x
     }
 
-    var yEdge: Int {
+    public var yEdge: Int {
         topRightCoordinate.y
     }
 }
@@ -106,6 +106,10 @@ public class Rover {
             case (.east, .backward),
                  (.west, .forward):
                 coordinate.x -= 1
+
+                if coordinate.x < 0 {
+                    coordinate.x = grid.xEdge
+                }
 
             case (_, .right):
                 direction.next()

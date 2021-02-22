@@ -199,7 +199,7 @@ class MarsRoverTests: XCTestCase {
 
         sut.move(commands: "F")
 
-        XCTAssertEqual(sut.coordinate, Coordinate(x: 0, y: 10))
+        XCTAssertEqual(sut.coordinate, Coordinate(x: 0, y: grid.yEdge))
     }
 
     func test_moveForwardEast_resetsXOnGridEdgeSurpassed() {
@@ -211,6 +211,17 @@ class MarsRoverTests: XCTestCase {
         sut.move(commands: "F")
 
         XCTAssertEqual(sut.coordinate, Coordinate(x: 0, y: 0))
+    }
+
+    func test_moveForwardWest_resetsXOnGridEdgeSurpassed() {
+        let grid = Grid(topRightCoordinate: Coordinate(x: 10, y: 10))
+        let initialCoordinate = Coordinate(x: 0, y: 0)
+        let direction: Rover.Direction = .west
+        let sut = makeSUT(coordinate: initialCoordinate, direction: direction, grid: grid)
+
+        sut.move(commands: "F")
+
+        XCTAssertEqual(sut.coordinate, Coordinate(x: grid.xEdge, y: 0))
     }
 }
 
