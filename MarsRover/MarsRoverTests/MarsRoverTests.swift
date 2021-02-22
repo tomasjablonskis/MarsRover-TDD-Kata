@@ -137,6 +137,7 @@ class MarsRoverTests: XCTestCase {
         expect(initialDirection: .north, toTurnTo: .south, withCommands: "RR")
         expect(initialDirection: .north, toTurnTo: .west, withCommands: "RRR")
         expect(initialDirection: .north, toTurnTo: .north, withCommands: "RRRR")
+        expect(initialDirection: .north, toTurnTo: .east, withCommands: "RRRRR")
     }
 }
 
