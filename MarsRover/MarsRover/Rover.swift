@@ -67,6 +67,9 @@ public class Rover {
                 direction = .east
             case (.east, .right):
                 direction = .south
+            case (.south, .right):
+                direction = .west
+                
 
             default:
                 break

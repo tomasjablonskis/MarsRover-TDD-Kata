@@ -132,12 +132,10 @@ class MarsRoverTests: XCTestCase {
         expect(sut: sut, toMoveTo: expectedCoordinate, withCommands: "BB")
     }
 
-    func test_moveRightNorth_changesDirectionToEast() {
+    func test_moveRightNorth_changesDirectionClockwise() {
         expect(initialDirection: .north, toTurnTo: .east, withCommands: "R")
-    }
-
-    func test_moveRightNorthTwice_changesDirectionToSouth() {
         expect(initialDirection: .north, toTurnTo: .south, withCommands: "RR")
+        expect(initialDirection: .north, toTurnTo: .west, withCommands: "RRR")
     }
 }
 
