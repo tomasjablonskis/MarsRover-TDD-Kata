@@ -14,7 +14,7 @@ class MarsRoverTests: XCTestCase {
     func test_init_setsInitialValues() {
         let initialCoordinate = Coordinate(x: 0, y: 0)
         let initialDirection = "W"
-        let rover = Rover(coordinate: initialCoordinate, direction: initialDirection)
+        let rover = makeSUT(coordinate: initialCoordinate, direction: initialDirection)
 
         XCTAssertEqual(rover.coordinate, initialCoordinate)
         XCTAssertEqual(rover.direction, initialDirection)
@@ -22,10 +22,17 @@ class MarsRoverTests: XCTestCase {
 
     func test_moveForwardNorth_incrementsYCoordinate() {
         let expectedCoordinate = Coordinate(x: 0, y: 1)
-        let rover = Rover(coordinate: Coordinate(x: 0, y: 0), direction: "N")
+        let sut = makeSUT(coordinate: Coordinate(x: 0, y: 0), direction: "N")
 
-        rover.move(command: "F")
+        sut.move(command: "F")
 
-        XCTAssertEqual(rover.coordinate, expectedCoordinate)
+        XCTAssertEqual(sut.coordinate, expectedCoordinate)
+    }
+
+}
+
+private extension MarsRoverTests {
+    func makeSUT(coordinate: Coordinate = Coordinate(x: 0, y: 0), direction: String = "E") -> Rover {
+        return Rover(coordinate: coordinate, direction: direction)
     }
 }
