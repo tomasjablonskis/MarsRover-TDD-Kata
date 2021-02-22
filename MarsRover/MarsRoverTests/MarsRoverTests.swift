@@ -20,6 +20,13 @@ class MarsRoverTests: XCTestCase {
         XCTAssertEqual(rover.direction, initialDirection)
     }
 
+    func test_init_throwsErrorOnNegativeInitialCoordinate() {
+        let invalidInitialCoordinate = Coordinate(x: -1, y: 0)
+        let grid = Grid(topRightCoordinate: Coordinate(x: 0, y: 0))
+
+        XCTAssertThrowsError(try Rover(coordinate: invalidInitialCoordinate, direction: .north, grid: grid))
+    }
+
     func test_moveForwardNorth_incrementsYCoordinate() {
         let expectedCoordinate = Coordinate(x: 0, y: 1)
         let sut = makeSUT(coordinate: Coordinate(x: 0, y: 0), direction: .north)
@@ -199,7 +206,7 @@ class MarsRoverTests: XCTestCase {
 
 private extension MarsRoverTests {
     func makeSUT(coordinate: Coordinate = Coordinate(x: 0, y: 0), direction: Rover.Direction = .east, grid: Grid = Grid(topRightCoordinate: Coordinate(x: 10, y: 10))) -> Rover {
-        return Rover(coordinate: coordinate, direction: direction, grid: grid)
+        return try! Rover(coordinate: coordinate, direction: direction, grid: grid)
     }
 
     func expect(sut: Rover, toMoveTo coordinate: Coordinate, withCommands commands: String, file: StaticString = #file, line: UInt = #line) {

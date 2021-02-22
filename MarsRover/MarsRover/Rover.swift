@@ -54,7 +54,14 @@ public class Rover {
     private(set) public var direction: Direction
     private let grid: Grid
 
-    public init(coordinate: Coordinate, direction: Direction, grid: Grid) {
+    private enum Error: Swift.Error {
+        case negativeInitialCoordinate
+    }
+
+    public init(coordinate: Coordinate, direction: Direction, grid: Grid) throws {
+        guard coordinate.x >= 0 && coordinate.y >= 0 else {
+            throw Error.negativeInitialCoordinate
+        }
         self.coordinate = coordinate
         self.direction = direction
         self.grid = grid
