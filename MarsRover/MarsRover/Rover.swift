@@ -99,6 +99,10 @@ public class Rover {
                  (.west, .backward):
                 coordinate.x += 1
 
+                if coordinate.x > grid.xEdge {
+                    coordinate.x = 0
+                }
+
             case (.east, .backward),
                  (.west, .forward):
                 coordinate.x -= 1
