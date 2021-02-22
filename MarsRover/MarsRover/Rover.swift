@@ -17,28 +17,6 @@ public struct Coordinate: Equatable {
     }
 }
 
-public struct Grid {
-    let topRightCoordinate: Coordinate
-    let obstacles: [Coordinate]
-
-    public init(topRightCoordinate: Coordinate, obstacles: [Coordinate] = []) {
-        self.topRightCoordinate = topRightCoordinate
-        self.obstacles = obstacles
-    }
-
-    public var xEdge: Int {
-        topRightCoordinate.x
-    }
-
-    public var yEdge: Int {
-        topRightCoordinate.y
-    }
-
-    public func isObstacle(inCoordinate coordinate: Coordinate) -> Bool {
-        obstacles.contains(coordinate)
-    }
-}
-
 public class Rover {
 
     public enum Direction: Int, CaseIterable {
