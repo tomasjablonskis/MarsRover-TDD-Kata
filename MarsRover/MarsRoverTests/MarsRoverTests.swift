@@ -138,6 +138,13 @@ class MarsRoverTests: XCTestCase {
 
         expect(sut: sut, toTurnTo: expectedDirection, withCommands: "R")
     }
+
+    func test_moveRightNorthTwice_changesDirectionToSouth() {
+        let expectedDirection: Rover.Direction = .south
+        let sut = makeSUT(direction: .north)
+
+        expect(sut: sut, toTurnTo: expectedDirection, withCommands: "RR")
+    }
 }
 
 private extension MarsRoverTests {

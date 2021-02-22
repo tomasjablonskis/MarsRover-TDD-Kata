@@ -63,8 +63,13 @@ public class Rover {
             case (.west, .backward):
                 coordinate.x += 1
 
-            default:
+            case (.north, .right):
                 direction = .east
+            case (.east, .right):
+                direction = .south
+
+            default:
+                break
             }
         }
     }
