@@ -53,25 +53,21 @@ public class Rover {
     public func move(commands: String) {
         commands.map(\.command).forEach { command in
             switch (direction, command) {
-            case (.north, .forward):
-                coordinate.y += 1
-            case (.north, .backward):
-                coordinate.y -= 1
-
-            case (.south, .forward):
-                coordinate.y -= 1
-            case (.south, .backward):
+            case (.north, .forward),
+                 (.south, .backward):
                 coordinate.y += 1
 
-            case (.east, .forward):
-                coordinate.x += 1
-            case (.east, .backward):
-                coordinate.x -= 1
+            case (.north, .backward),
+                 (.south, .forward):
+                coordinate.y -= 1
 
-            case (.west, .forward):
-                coordinate.x -= 1
-            case (.west, .backward):
+            case (.east, .forward),
+                 (.west, .backward):
                 coordinate.x += 1
+
+            case (.east, .backward),
+                 (.west, .forward):
+                coordinate.x -= 1
 
             case (_, .right):
                 direction.next()
