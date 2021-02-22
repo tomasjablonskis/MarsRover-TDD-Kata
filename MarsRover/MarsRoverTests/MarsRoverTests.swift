@@ -220,6 +220,22 @@ class MarsRoverTests: XCTestCase {
             expectRover(withInitialCoordinate: initialCoordinate, andDirection: direction, onGrid: grid, toMoveTo: expectedCoordinate, withCommands: command)
         }
     }
+
+    func test_moveToObstacle_doesNotMove() {
+        let expectedObstacles: [Coordinate] = [Coordinate(x: 5, y: 5)]
+        let grid = Grid(topRightCoordinate: Coordinate(x: 10, y: 10), obstacles: expectedObstacles)
+        let sut = makeSUT(coordinate: Coordinate(x: 3, y: 2), direction: .west, grid: grid)
+        let exp = expectation(description: "Wait for obstacle report")
+
+        var receivedObstacles = [Coordinate]()
+        sut.move(commands: "RFFFRFF") { detectedObstacle in
+            receivedObstacles.append(detectedObstacle)
+            exp.fulfill()
+        }
+
+        wait(for: [exp], timeout: 2)
+        XCTAssertEqual(expectedObstacles, receivedObstacles)
+    }
 }
 
 // MARK: - Helpers

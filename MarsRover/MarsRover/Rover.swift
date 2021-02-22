@@ -19,9 +19,11 @@ public struct Coordinate: Equatable {
 
 public struct Grid {
     let topRightCoordinate: Coordinate
+    let obstacles: [Coordinate]
 
-    public init(topRightCoordinate: Coordinate) {
+    public init(topRightCoordinate: Coordinate, obstacles: [Coordinate] = []) {
         self.topRightCoordinate = topRightCoordinate
+        self.obstacles = obstacles
     }
 
     public var xEdge: Int {
@@ -30,6 +32,10 @@ public struct Grid {
 
     public var yEdge: Int {
         topRightCoordinate.y
+    }
+
+    public func isObstacle(inCoordinate coordinate: Coordinate) -> Bool {
+        obstacles.contains(coordinate)
     }
 }
 
@@ -76,39 +82,42 @@ public class Rover {
         }
     }
 
-    public func move(commands: String) {
+    public func move(commands: String, onObstacleFound: @escaping (_ obstacle: Coordinate) -> Void = { _ in }) {
         commands.map(\.command).forEach { command in
+
+            var temp = coordinate
+
             switch (direction, command) {
             case (.north, .forward),
                  (.south, .backward):
-                coordinate.y += 1
+                temp.y += 1
 
-                if coordinate.y > grid.yEdge {
-                    coordinate.y = 0
+                if temp.y > grid.yEdge {
+                    temp.y = 0
                 }
 
             case (.north, .backward),
                  (.south, .forward):
-                coordinate.y -= 1
+                temp.y -= 1
 
-                if coordinate.y < 0 {
-                    coordinate.y = grid.yEdge
+                if temp.y < 0 {
+                    temp.y = grid.yEdge
                 }
 
             case (.east, .forward),
                  (.west, .backward):
-                coordinate.x += 1
+                temp.x += 1
 
-                if coordinate.x > grid.xEdge {
-                    coordinate.x = 0
+                if temp.x > grid.xEdge {
+                    temp.x = 0
                 }
 
             case (.east, .backward),
                  (.west, .forward):
-                coordinate.x -= 1
+                temp.x -= 1
 
-                if coordinate.x < 0 {
-                    coordinate.x = grid.xEdge
+                if temp.x < 0 {
+                    temp.x = grid.xEdge
                 }
 
             case (_, .right):
@@ -117,6 +126,14 @@ public class Rover {
             case (_, .left):
                 direction.previous()
             }
+
+            if grid.isObstacle(inCoordinate: temp) {
+                onObstacleFound(temp)
+                print("Obstacle detected at: \(temp)")
+                return
+            }
+
+            self.coordinate = temp
         }
     }
 
