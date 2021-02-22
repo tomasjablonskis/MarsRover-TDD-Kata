@@ -183,89 +183,57 @@ class MarsRoverTests: XCTestCase {
     func test_moveForwardNorth_resetsYOnGridEdgeSurpassed() {
         let grid = Grid(topRightCoordinate: Coordinate(x: 10, y: 10))
         let initialCoordinate = Coordinate(x: 0, y: 10)
-        let direction: Rover.Direction = .north
-        let sut = makeSUT(coordinate: initialCoordinate, direction: direction, grid: grid)
 
-        sut.move(commands: "F")
-
-        XCTAssertEqual(sut.coordinate, Coordinate(x: 0, y: 0))
+        expectRover(withInitialCoordinate: initialCoordinate, andDirection: .north, onGrid: grid, toMoveTo: Coordinate(x: 0, y: 0), withCommands: "F")
     }
 
     func test_moveForwardSouth_resetsYOnGridEdgeSurpassedToNegativeSide() {
         let grid = Grid(topRightCoordinate: Coordinate(x: 10, y: 10))
         let initialCoordinate = Coordinate(x: 0, y: 0)
-        let direction: Rover.Direction = .south
-        let sut = makeSUT(coordinate: initialCoordinate, direction: direction, grid: grid)
 
-        sut.move(commands: "F")
-
-        XCTAssertEqual(sut.coordinate, Coordinate(x: 0, y: grid.yEdge))
+        expectRover(withInitialCoordinate: initialCoordinate, andDirection: .south, onGrid: grid, toMoveTo: Coordinate(x: 0, y: grid.yEdge), withCommands: "F")
     }
 
     func test_moveForwardEast_resetsXOnGridEdgeSurpassed() {
         let grid = Grid(topRightCoordinate: Coordinate(x: 10, y: 10))
         let initialCoordinate = Coordinate(x: 10, y: 0)
-        let direction: Rover.Direction = .east
-        let sut = makeSUT(coordinate: initialCoordinate, direction: direction, grid: grid)
 
-        sut.move(commands: "F")
-
-        XCTAssertEqual(sut.coordinate, Coordinate(x: 0, y: 0))
+        expectRover(withInitialCoordinate: initialCoordinate, andDirection: .east, onGrid: grid, toMoveTo: Coordinate(x: 0, y: 0), withCommands: "F")
     }
 
     func test_moveForwardWest_resetsXOnGridEdgeSurpassedToNegativeSide() {
         let grid = Grid(topRightCoordinate: Coordinate(x: 10, y: 10))
         let initialCoordinate = Coordinate(x: 0, y: 0)
-        let direction: Rover.Direction = .west
-        let sut = makeSUT(coordinate: initialCoordinate, direction: direction, grid: grid)
 
-        sut.move(commands: "F")
-
-        XCTAssertEqual(sut.coordinate, Coordinate(x: grid.xEdge, y: 0))
+        expectRover(withInitialCoordinate: initialCoordinate, andDirection: .west, onGrid: grid, toMoveTo: Coordinate(x: grid.xEdge, y: 0), withCommands: "F")
     }
 
     func test_moveBackwardNorth_resetsYOnGridEdgeSurpassedToNegativeSide() {
         let grid = Grid(topRightCoordinate: Coordinate(x: 10, y: 10))
         let initialCoordinate = Coordinate(x: 0, y: 0)
-        let direction: Rover.Direction = .north
-        let sut = makeSUT(coordinate: initialCoordinate, direction: direction, grid: grid)
 
-        sut.move(commands: "B")
-
-        XCTAssertEqual(sut.coordinate, Coordinate(x: 0, y: grid.yEdge))
+        expectRover(withInitialCoordinate: initialCoordinate, andDirection: .north, onGrid: grid, toMoveTo: Coordinate(x: 0, y: grid.yEdge), withCommands: "B")
     }
 
     func test_moveBackwardSouth_resetsYOnGridEdgeSurpassed() {
         let grid = Grid(topRightCoordinate: Coordinate(x: 10, y: 10))
         let initialCoordinate = Coordinate(x: 0, y: 10)
-        let direction: Rover.Direction = .south
-        let sut = makeSUT(coordinate: initialCoordinate, direction: direction, grid: grid)
 
-        sut.move(commands: "B")
-
-        XCTAssertEqual(sut.coordinate, Coordinate(x: 0, y: 0))
+        expectRover(withInitialCoordinate: initialCoordinate, andDirection: .south, onGrid: grid, toMoveTo: Coordinate(x: 0, y: 0), withCommands: "B")
     }
 
     func test_moveBackwardEast_resetsXOnGridEdgeSurpassed() {
         let grid = Grid(topRightCoordinate: Coordinate(x: 10, y: 10))
         let initialCoordinate = Coordinate(x: 0, y: 0)
-        let direction: Rover.Direction = .east
-        let sut = makeSUT(coordinate: initialCoordinate, direction: direction, grid: grid)
 
-        sut.move(commands: "B")
-
-        XCTAssertEqual(sut.coordinate, Coordinate(x: grid.xEdge, y: 0))
+        expectRover(withInitialCoordinate: initialCoordinate, andDirection: .east, onGrid: grid, toMoveTo: Coordinate(x: grid.xEdge, y: 0), withCommands: "B")
     }
 
     func test_moveBackwardWest_resetsXOnGridEdgeSurpassed() {
         let grid = Grid(topRightCoordinate: Coordinate(x: 10, y: 10))
         let initialCoordinate = Coordinate(x: 10, y: 0)
-        let direction: Rover.Direction = .west
-        let sut = makeSUT(coordinate: initialCoordinate, direction: direction, grid: grid)
 
-        sut.move(commands: "B")
-
-        XCTAssertEqual(sut.coordinate, Coordinate(x: 0, y: 0))
+        expectRover(withInitialCoordinate: initialCoordinate, andDirection: .west, onGrid: grid, toMoveTo: Coordinate(x: 0, y: 0), withCommands: "B")
     }
 }
 
@@ -274,8 +242,8 @@ private extension MarsRoverTests {
         return try! Rover(coordinate: coordinate, direction: direction, grid: grid)
     }
 
-    func expectRover(withInitialCoordinate initialCoordinate: Coordinate, andDirection initialDirection: Rover.Direction, toMoveTo expectedCoordinate: Coordinate, withCommands commands: String, file: StaticString = #file, line: UInt = #line) {
-        let sut = makeSUT(coordinate: initialCoordinate, direction: initialDirection)
+    func expectRover(withInitialCoordinate initialCoordinate: Coordinate, andDirection initialDirection: Rover.Direction, onGrid grid: Grid = Grid(topRightCoordinate: Coordinate(x: 100, y: 100)), toMoveTo expectedCoordinate: Coordinate, withCommands commands: String, file: StaticString = #file, line: UInt = #line) {
+        let sut = makeSUT(coordinate: initialCoordinate, direction: initialDirection, grid: grid)
 
         sut.move(commands: commands)
 
