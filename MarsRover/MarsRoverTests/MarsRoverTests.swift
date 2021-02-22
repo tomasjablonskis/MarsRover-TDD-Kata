@@ -179,6 +179,17 @@ class MarsRoverTests: XCTestCase {
         expectRover(withInitialDirection: .west, toTurnTo: .west, withCommands: "LLLL")
         expectRover(withInitialDirection: .west, toTurnTo: .south, withCommands: "LLLLL")
     }
+
+    func test_moveForwardNorth_resetsYOnGridEdgeExceeded() {
+        let grid = Grid(topRightCoordinate: Coordinate(x: 10, y: 10))
+        let initialCoordinate = Coordinate(x: 0, y: 10)
+        let direction: Rover.Direction = .north
+        let sut = makeSUT(coordinate: initialCoordinate, direction: direction, grid: grid)
+
+        sut.move(commands: "F")
+
+        XCTAssertEqual(sut.coordinate, Coordinate(x: 0, y: 0))
+    }
 }
 
 private extension MarsRoverTests {

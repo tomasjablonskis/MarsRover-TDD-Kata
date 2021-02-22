@@ -83,6 +83,10 @@ public class Rover {
                  (.south, .backward):
                 coordinate.y += 1
 
+                if coordinate.y > grid.yEdge {
+                    coordinate.y = 0
+                }
+
             case (.north, .backward),
                  (.south, .forward):
                 coordinate.y -= 1
