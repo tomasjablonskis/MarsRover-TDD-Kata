@@ -31,7 +31,7 @@ class MarsRoverTests: XCTestCase {
         testCases.forEach { invalidInitialCoordinate in
             let grid = Grid(topRightCoordinate: Coordinate(x: 0, y: 0))
 
-            XCTAssertNil(try? Rover(coordinate: invalidInitialCoordinate, direction: .north, grid: grid))
+            XCTAssertNil(try? Rover(coordinate: invalidInitialCoordinate, direction: .north, grid: grid), "Created Rover with invalid initial coordinate! Rover out of bounds validation passed when it should fail!")
         }
     }
 

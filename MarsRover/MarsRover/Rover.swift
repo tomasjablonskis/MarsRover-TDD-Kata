@@ -106,7 +106,10 @@ public class Rover {
     }
 
     private func isOutOfBounds() -> Bool {
-        coordinate.x < 0 || coordinate.y < 0 || coordinate.x > grid.xEdge || coordinate.y > grid.yEdge
+        let xAxis = Array(0...grid.xEdge)
+        let yAxis = Array(0...grid.yEdge)
+        let isInBounds = xAxis.contains(coordinate.x) && yAxis.contains(coordinate.y)
+        return !isInBounds
     }
 }
 
